@@ -16,11 +16,11 @@ fn add_accelerators(app: &gtk::Application) {
 }
 
 fn add_actions(app: &gtk::Application, window: &gtk::ApplicationWindow) {
-    let open_action = gio::SimpleAction::new("open", None);
-    open_action.connect_activate(|_, _| {
+    let open = gio::SimpleAction::new("open", None);
+    open.connect_activate(|_, _| {
         println!("Open");
     });
-    app.add_action(&open_action);
+    app.add_action(&open);
     let quit = gio::SimpleAction::new("quit", None);
     quit.connect_activate(glib::clone!(@weak window => move |_, _| {
         window.close();
