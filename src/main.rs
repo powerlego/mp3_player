@@ -1,6 +1,6 @@
-pub mod controls;
+pub mod play_button;
 
-use controls::PlayButton;
+use play_button::PlayButton;
 use gtk::gdk::Display;
 use gtk::prelude::*;
 use gtk::{
