@@ -1,5 +1,12 @@
+pub mod controls;
+
+use controls::PlayButton;
+use gtk::gdk::Display;
 use gtk::prelude::*;
-use gtk::{gio, glib, Application, ApplicationWindow};
+use gtk::{
+    gio, glib, Application, ApplicationWindow, CssProvider, StyleContext,
+    STYLE_PROVIDER_PRIORITY_APPLICATION,
+};
 
 fn build_file_menu() -> gio::Menu {
     let menu = gio::Menu::new();
@@ -152,7 +159,6 @@ fn add_actions(app: &gtk::Application, window: &gtk::ApplicationWindow) {
     }));
     app.add_action(&quit);
 
-
     /* -------------------------------- Edit Menu ------------------------------- */
     let undo = gio::SimpleAction::new("undo", None);
     undo.connect_activate(|_, _| {
@@ -226,15 +232,17 @@ fn build_ui(app: &gtk::Application) {
     window.set_show_menubar(true);
 
     let vbox = gtk::Box::new(gtk::Orientation::Vertical, 0);
-    let label = gtk::Label::new(Some("MP3 Player"));
-    vbox.append(&label);
+    let play_button = PlayButton::new();
+    vbox.append(&play_button);
     window.set_child(Some(&vbox));
 
     build_menu(app);
 
     add_actions(app, &window);
 
-    window.show();
+    app.connect_activate(move |_| {
+        window.show();
+    });
 }
 
 fn main() {
@@ -243,10 +251,18 @@ fn main() {
         .build();
 
     application.connect_startup(|app| {
+        let provider = CssProvider::new();
+        provider.load_from_data(include_bytes!("style.css"));
+        // We give the CssProvided to the default screen so the CSS rules we added
+        // can be applied to our window.
+        StyleContext::add_provider_for_display(
+            &Display::default().expect("Could not connect to a display."),
+            &provider,
+            STYLE_PROVIDER_PRIORITY_APPLICATION,
+        );
         add_accelerators(app);
+        build_ui(app);
     });
-
-    application.connect_activate(build_ui);
 
     application.run();
 }
