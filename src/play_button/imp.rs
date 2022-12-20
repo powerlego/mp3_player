@@ -1,7 +1,7 @@
 use std::cell::RefCell;
 
-use gio::prelude::Cast;
 use gtk::glib;
+use gtk::prelude::*;
 use gtk::subclass::prelude::*;
 use gtk::traits::WidgetExt;
 
@@ -9,6 +9,7 @@ use gtk::traits::WidgetExt;
 pub struct PlayButton {
     frame: RefCell<Option<gtk::AspectFrame>>,
     child: RefCell<Option<gtk::Widget>>,
+    pub playing: RefCell<bool>,
 }
 
 #[glib::object_subclass]
@@ -27,22 +28,45 @@ impl ObjectImpl for PlayButton {
     fn constructed(&self) {
         self.parent_constructed();
         let obj = self.obj();
-
-        let button = gtk::Button::new();
+        let button: gtk::Button = gtk::Button::new();
         button.add_css_class("play-button");
-        *self.child.borrow_mut() = Some(button.clone().upcast::<gtk::Widget>());
-
         let frame = gtk::AspectFrame::new(0.5, 0.5, 1.0, false);
-        frame.set_valign(gtk::Align::Center);
-        frame.set_halign(gtk::Align::Center);
         frame.set_parent(&*obj);
-        frame.set_child(Some(&button));
         *self.frame.borrow_mut() = Some(frame.clone());
+        frame.set_child(Some(&button));
+        button.set_icon_name("media-playback-start-symbolic");
+        let icon = button.child().unwrap().downcast::<gtk::Image>().unwrap();
+        icon.add_css_class("play-button-icon");
+        icon.set_halign(gtk::Align::Fill);
+        icon.set_valign(gtk::Align::Fill);
+        //icon.set_icon_size(gtk::IconSize::Large);
+        button.connect_clicked(|button| {
+            let play_button = button
+                .parent()
+                .unwrap()
+                .parent()
+                .unwrap()
+                .downcast::<super::PlayButton>()
+                .unwrap();
+            let imp = play_button.imp();
+            let mut playing = imp.playing.borrow_mut();
+            if *playing {
+                button.remove_css_class("playing");
+            } else {
+                button.add_css_class("playing");
+            }
+            *playing = !*playing;
+            println!("{:?}", button.size(gtk::Orientation::Horizontal));
+        });
+        *self.child.borrow_mut() = Some(button.clone().upcast::<gtk::Widget>());
         obj.set_halign(gtk::Align::Center);
         obj.set_valign(gtk::Align::Center);
     }
 
     fn dispose(&self) {
+        // if let Some(child) = self.child.borrow_mut().take() {
+        //     child.unparent();
+        // }
         if let Some(frame) = self.frame.borrow_mut().take() {
             frame.unparent();
         }
