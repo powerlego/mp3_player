@@ -16,3 +16,8 @@ button.playing {
     color: #000;
 }
 
+.play-button-icon{
+    min-width: 70px;
+    min-height: 70px;
+    color: black;
+}
