@@ -1,12 +1,12 @@
 pub mod play_button;
 
-use play_button::PlayButton;
 use gtk::gdk::Display;
 use gtk::prelude::*;
 use gtk::{
     gio, glib, Application, ApplicationWindow, CssProvider, StyleContext,
     STYLE_PROVIDER_PRIORITY_APPLICATION,
 };
+use play_button::PlayButton;
 
 fn build_file_menu() -> gio::Menu {
     let menu = gio::Menu::new();
@@ -246,6 +246,10 @@ fn build_ui(app: &gtk::Application) {
 }
 
 fn main() {
+    dotenv::dotenv().ok();
+    let bytes = glib::Bytes::from_static(include_bytes!("../resources/resources.gresource"));
+    let resource = gio::Resource::from_data(&bytes).unwrap();
+    gio::resources_register(&resource);
     let application = Application::builder()
         .application_id("org.ncc.mp3player")
         .build();
@@ -260,6 +264,7 @@ fn main() {
             &provider,
             STYLE_PROVIDER_PRIORITY_APPLICATION,
         );
+
         add_accelerators(app);
         build_ui(app);
     });

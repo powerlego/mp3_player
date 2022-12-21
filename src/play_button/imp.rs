@@ -1,5 +1,6 @@
 use std::cell::RefCell;
 
+use gdk_pixbuf::prelude::*;
 use gtk::glib;
 use gtk::prelude::*;
 use gtk::subclass::prelude::*;
@@ -34,11 +35,14 @@ impl ObjectImpl for PlayButton {
         frame.set_parent(&*obj);
         *self.frame.borrow_mut() = Some(frame.clone());
         frame.set_child(Some(&button));
-        button.set_icon_name("media-playback-start-symbolic");
-        let icon = button.child().unwrap().downcast::<gtk::Image>().unwrap();
+        
+        // let handle = librsvg::Loader::new().read_stream(stream, base_file, cancellable)
+        let pixbuf = gdk_pixbuf::Pixbuf::from_resource("/org/ncc/mp3player/images/play_button.svg").unwrap();
+        let icon = gtk::Image::from_pixbuf(Some(&pixbuf));
+        button.set_child(Some(&icon));
         icon.add_css_class("play-button-icon");
-        icon.set_halign(gtk::Align::Fill);
-        icon.set_valign(gtk::Align::Fill);
+        // icon.set_halign(gtk::Align::Fill);
+        // icon.set_valign(gtk::Align::Fill);
         //icon.set_icon_size(gtk::IconSize::Large);
         button.connect_clicked(|button| {
             let play_button = button
