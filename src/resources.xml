@@ -2,7 +2,7 @@
 <gresources>
     <gresource prefix="/org/ncc/mp3player">
         <file>data/icons/scalable/play-button-symbolic.svg</file>
-        <file>data/icons/scalable/play-button-symbolic.symbolic.png</file>
+        <file>data/icons/symbolic/play-button-symbolic.symbolic.png</file>
     </gresource>
 </gresources>
         
