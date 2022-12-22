@@ -35,12 +35,23 @@ impl ObjectImpl for PlayButton {
         frame.set_parent(&*obj);
         *self.frame.borrow_mut() = Some(frame.clone());
         frame.set_child(Some(&button));
+        // let file = gio::File::for_path("resource:///org/ncc/mp3player/images/play_button.svg");
+        // let stream = file.read(None::<&gio::Cancellable>).unwrap();
+        // let handle = librsvg::Loader::new().read_stream(&stream, Some(&file), None::<&gio::Cancellable>).unwrap();
+        // let surface = cairo::ImageSurface::create(cairo::Format::ARgb32, 100, 100).unwrap();
+        // let cr = cairo::Context::new(&surface).unwrap();
+
+        // let renderer = librsvg::CairoRenderer::new(&handle);
+        // renderer.render_document(&cr, &cairo::Rectangle::new(0.0, 0.0, 100.0, 100.0));
         
-        // let handle = librsvg::Loader::new().read_stream(stream, base_file, cancellable)
-        let pixbuf = gdk_pixbuf::Pixbuf::from_resource("/org/ncc/mp3player/images/play_button.svg").unwrap();
-        let icon = gtk::Image::from_pixbuf(Some(&pixbuf));
+        
+        // let icon = gtk::Image::from_icon_name("play-button-symbolic");
+        // icon.add_css_class("play-button-icon");
+
+        // button.set_child(Some(&icon));
+        let icon = gtk::Image::from_icon_name("play-button-symbolic");
         button.set_child(Some(&icon));
-        icon.add_css_class("play-button-icon");
+        
         // icon.set_halign(gtk::Align::Fill);
         // icon.set_valign(gtk::Align::Fill);
         //icon.set_icon_size(gtk::IconSize::Large);
@@ -56,8 +67,10 @@ impl ObjectImpl for PlayButton {
             let mut playing = imp.playing.borrow_mut();
             if *playing {
                 button.remove_css_class("playing");
+                
             } else {
                 button.add_css_class("playing");
+                
             }
             *playing = !*playing;
             println!("{:?}", button.size(gtk::Orientation::Horizontal));

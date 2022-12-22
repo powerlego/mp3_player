@@ -8,6 +8,13 @@ use gtk::{
 };
 use play_button::PlayButton;
 
+macro_rules! add_icons_resource_path {
+    ($icons:expr) => {
+        let theme = gtk::IconTheme::for_display(&Display::default().unwrap());
+        theme.add_resource_path($icons);
+    };
+}
+
 fn build_file_menu() -> gio::Menu {
     let menu = gio::Menu::new();
     /* -------------------------------------------------------------------------- */
@@ -247,7 +254,7 @@ fn build_ui(app: &gtk::Application) {
 
 fn main() {
     dotenv::dotenv().ok();
-    let bytes = glib::Bytes::from_static(include_bytes!("../resources/resources.gresource"));
+    let bytes = glib::Bytes::from_static(include_bytes!("resources.gresource"));
     let resource = gio::Resource::from_data(&bytes).unwrap();
     gio::resources_register(&resource);
     let application = Application::builder()
@@ -256,7 +263,8 @@ fn main() {
 
     application.connect_startup(|app| {
         let provider = CssProvider::new();
-        provider.load_from_data(include_bytes!("style.css"));
+        provider.load_from_data(include_bytes!("data/style.css"));
+
         // We give the CssProvided to the default screen so the CSS rules we added
         // can be applied to our window.
         StyleContext::add_provider_for_display(
@@ -264,7 +272,7 @@ fn main() {
             &provider,
             STYLE_PROVIDER_PRIORITY_APPLICATION,
         );
-
+        add_icons_resource_path!("/org/ncc/mp3player/data/icons/symbolic");
         add_accelerators(app);
         build_ui(app);
     });

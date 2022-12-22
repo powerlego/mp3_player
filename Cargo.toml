@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-cairo-rs = "0.16.7"
+cairo-rs = { version = "0.16.7", features = ["svg"] }
 dotenv = "0.15.0"
 gdk-pixbuf = "0.16.7"
 gio = "0.16.7"
