@@ -172,6 +172,13 @@ class MainWindow(QMainWindow):
         self.edit_menu.addSeparator()
         self.edit_menu.addAction(self.preferences_action)
         
+        # ---------------------------------------------------------------------------- #
+        #                                   Help Menu                                  #
+        # ---------------------------------------------------------------------------- #
+        self.help_menu = self.menuBar().addMenu(self.tr("Help"))
+        self.help_menu.addAction(self.help_action)
+        self.help_menu.addAction(self.about_action)
+        
 
     # ---------------------------------------------------------------------------- #
     #                           File Menu Action Methods                           #
