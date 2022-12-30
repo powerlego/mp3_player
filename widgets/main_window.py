@@ -79,4 +79,14 @@ class MainWindow(QMainWindow):
         
     def create_menus(self):
         self.file_menu = self.menuBar().addMenu(self.tr("File"))
+        self.file_menu.addAction(self.new_playlist_action)
+        self.file_menu.addAction(self.open_action)
+        self.file_menu.addSeparator()
+        self.import_menu = self.file_menu.addMenu(self.tr("Import"))
+        self.import_menu.addAction(self.import_file_action)
+        self.import_menu.addAction(self.import_folder_action)
+        self.import_menu.addAction(self.import_playlist_action)
+        self.file_menu.addAction(self.export_action)
+        self.file_menu.addSeparator()
         self.file_menu.addAction(self.quit_action)
+    
