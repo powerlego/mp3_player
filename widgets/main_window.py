@@ -13,6 +13,8 @@ class MainWindow(QMainWindow):
         layout.setContentsMargins(5, 5, 5, 5)
         layout.addWidget(label)
         self.widget.setLayout(layout)
+        self.create_actions()
+        self.create_menus()
         self.setMinimumSize(160, 160)
         self.resize(480, 320)
         
