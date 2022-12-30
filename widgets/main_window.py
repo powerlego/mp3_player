@@ -78,6 +78,77 @@ class MainWindow(QMainWindow):
         self.quit_action.setStatusTip("Quit the application")
         self.quit_action.triggered.connect(self.close)
 
+        # ---------------------------------------------------------------------------- #
+        #                                   Edit Menu                                  #
+        # ---------------------------------------------------------------------------- #
+
+        # ----------------------------------- Undo ----------------------------------- #
+        self.undo_action = QtGui.QAction(self.tr("Undo"), self)
+        self.undo_action.setShortcut(QtGui.QKeySequence.StandardKey.Undo)
+        self.undo_action.setStatusTip(self.tr("Undo the last action"))
+        self.undo_action.triggered.connect(self.undo)
+
+        # ----------------------------------- Redo ----------------------------------- #
+        self.redo_action = QtGui.QAction(self.tr("Redo"), self)
+        self.redo_action.setShortcut(QtGui.QKeySequence.StandardKey.Redo)
+        self.redo_action.setStatusTip(self.tr("Redo the last action"))
+        self.redo_action.triggered.connect(self.redo)
+
+        # ------------------------------------ Cut ----------------------------------- #
+        self.cut_action = QtGui.QAction(self.tr("Cut"), self)
+        self.cut_action.setShortcut(QtGui.QKeySequence.StandardKey.Cut)
+        self.cut_action.setStatusTip(self.tr("Cut the selected item"))
+        self.cut_action.triggered.connect(self.cut)
+
+        # ----------------------------------- Copy ----------------------------------- #
+        self.copy_action = QtGui.QAction(self.tr("Copy"), self)
+        self.copy_action.setShortcut(QtGui.QKeySequence.StandardKey.Copy)
+        self.copy_action.setStatusTip(self.tr("Copy the selected item"))
+        self.copy_action.triggered.connect(self.copy)
+
+        # ----------------------------------- Paste ---------------------------------- #
+        self.paste_action = QtGui.QAction(self.tr("Paste"), self)
+        self.paste_action.setShortcut(QtGui.QKeySequence.StandardKey.Paste)
+        self.paste_action.setStatusTip(self.tr("Paste the item from the clipboard"))
+        self.paste_action.triggered.connect(self.paste)
+
+        # ---------------------------------- Delete ---------------------------------- #
+        self.delete_action = QtGui.QAction(self.tr("Delete"), self)
+        self.delete_action.setShortcut(QtGui.QKeySequence.StandardKey.Delete)
+        self.delete_action.setStatusTip(self.tr("Delete the selected item"))
+        self.delete_action.triggered.connect(self.delete)
+
+        # -------------------------------- Preferences ------------------------------- #
+        self.preferences_action = QtGui.QAction(self.tr("Preferences"), self)
+        self.preferences_action.setShortcut(QtGui.QKeySequence.StandardKey.Preferences)
+        self.preferences_action.setStatusTip(self.tr("Change the player's preferences"))
+        self.preferences_action.triggered.connect(self.preferences)
+
+    def create_menus(self):
+        # ---------------------------------------------------------------------------- #
+        #                                   File Menu                                  #
+        # ---------------------------------------------------------------------------- #
+        self.file_menu = self.menuBar().addMenu(self.tr("File"))
+        self.file_menu.addAction(self.new_playlist_action)
+        self.file_menu.addAction(self.open_action)
+        self.file_menu.addSeparator()
+        # ------------------------------ Import Submenu ------------------------------ #
+        self.import_menu = self.file_menu.addMenu(self.tr("Import"))
+        self.import_menu.addAction(self.import_file_action)
+        self.import_menu.addAction(self.import_folder_action)
+        self.import_menu.addAction(self.import_playlist_action)
+
+        self.file_menu.addAction(self.export_action)
+        self.file_menu.addSeparator()
+        self.file_menu.addAction(self.quit_action)
+
+        # ---------------------------------------------------------------------------- #
+        #                                   Edit Menu                                  #
+        # ---------------------------------------------------------------------------- #
+
+    # ---------------------------------------------------------------------------- #
+    #                           File Menu Action Methods                           #
+    # ---------------------------------------------------------------------------- #
     def import_file(self):
         print("Import File")
 
@@ -96,15 +167,28 @@ class MainWindow(QMainWindow):
     def new_playlist(self):
         print("New Playlist")
 
-    def create_menus(self):
-        self.file_menu = self.menuBar().addMenu(self.tr("File"))
-        self.file_menu.addAction(self.new_playlist_action)
-        self.file_menu.addAction(self.open_action)
-        self.file_menu.addSeparator()
-        self.import_menu = self.file_menu.addMenu(self.tr("Import"))
-        self.import_menu.addAction(self.import_file_action)
-        self.import_menu.addAction(self.import_folder_action)
-        self.import_menu.addAction(self.import_playlist_action)
-        self.file_menu.addAction(self.export_action)
-        self.file_menu.addSeparator()
-        self.file_menu.addAction(self.quit_action)
+    # ---------------------------------------------------------------------------- #
+    #                           Edit Menu Action Methods                           #
+    # ---------------------------------------------------------------------------- #
+    
+    def undo(self):
+        print("Undo")
+    
+    def redo(self):
+        print("Redo")
+        
+    def cut(self):
+        print("Cut")
+    
+    def copy(self):
+        print("Copy")
+    
+    def paste(self):
+        print("Paste")
+        
+    def delete(self):
+        print("Delete")
+        
+    def preferences(self):
+        print("Preferences")
+    
