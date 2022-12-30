@@ -49,7 +49,8 @@ impl ObjectImpl for PlayButton {
         // icon.add_css_class("play-button-icon");
 
         // button.set_child(Some(&icon));
-        let icon = gtk::Image::from_icon_name("play-button-symbolic");
+        let icon = gtk::Image::from_icon_name("media-playback-start-symbolic");
+        icon.add_css_class("play-button-icon");
         button.set_child(Some(&icon));
         
         // icon.set_halign(gtk::Align::Fill);
