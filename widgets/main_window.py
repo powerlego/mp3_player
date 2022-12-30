@@ -123,22 +123,21 @@ class MainWindow(QMainWindow):
         self.preferences_action.setShortcut(QtGui.QKeySequence.StandardKey.Preferences)
         self.preferences_action.setStatusTip(self.tr("Change the player's preferences"))
         self.preferences_action.triggered.connect(self.preferences)
-        
+
         # ---------------------------------------------------------------------------- #
         #                                   Help Menu                                  #
         # ---------------------------------------------------------------------------- #
-        
+
         # ----------------------------------- Help ----------------------------------- #
         self.help_action = QtGui.QAction(self.tr("Help"), self)
         self.help_action.setShortcut(QtGui.QKeySequence.StandardKey.HelpContents)
         self.help_action.setStatusTip(self.tr("Open the help file"))
         self.help_action.triggered.connect(self.help)
-        
+
         # ----------------------------------- About ---------------------------------- #
         self.about_action = QtGui.QAction(self.tr("About"), self)
         self.about_action.setStatusTip(self.tr("About the application"))
         self.about_action.triggered.connect(self.about)
-        
 
     def create_menus(self):
         # ---------------------------------------------------------------------------- #
@@ -171,14 +170,13 @@ class MainWindow(QMainWindow):
         self.edit_menu.addAction(self.delete_action)
         self.edit_menu.addSeparator()
         self.edit_menu.addAction(self.preferences_action)
-        
+
         # ---------------------------------------------------------------------------- #
         #                                   Help Menu                                  #
         # ---------------------------------------------------------------------------- #
         self.help_menu = self.menuBar().addMenu(self.tr("Help"))
         self.help_menu.addAction(self.help_action)
         self.help_menu.addAction(self.about_action)
-        
 
     # ---------------------------------------------------------------------------- #
     #                           File Menu Action Methods                           #
@@ -206,30 +204,30 @@ class MainWindow(QMainWindow):
     # ---------------------------------------------------------------------------- #
     def undo(self):
         print("Undo")
-    
+
     def redo(self):
         print("Redo")
-        
+
     def cut(self):
         print("Cut")
-    
+
     def copy(self):
         print("Copy")
-    
+
     def paste(self):
         print("Paste")
-        
+
     def delete(self):
         print("Delete")
-        
+
     def preferences(self):
         print("Preferences")
-        
+
     # ---------------------------------------------------------------------------- #
     #                           Help Menu Action Methods                           #
     # ---------------------------------------------------------------------------- #
     def help(self):
         print("Help")
-    
+
     def about(self):
         print("About")
