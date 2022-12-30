@@ -145,6 +145,18 @@ class MainWindow(QMainWindow):
         # ---------------------------------------------------------------------------- #
         #                                   Edit Menu                                  #
         # ---------------------------------------------------------------------------- #
+        
+        self.edit_menu = self.menuBar().addMenu(self.tr("Edit"))
+        self.edit_menu.addAction(self.undo_action)
+        self.edit_menu.addAction(self.redo_action)
+        self.edit_menu.addSeparator()
+        self.edit_menu.addAction(self.cut_action)
+        self.edit_menu.addAction(self.copy_action)
+        self.edit_menu.addAction(self.paste_action)
+        self.edit_menu.addAction(self.delete_action)
+        self.edit_menu.addSeparator()
+        self.edit_menu.addAction(self.preferences_action)
+        
 
     # ---------------------------------------------------------------------------- #
     #                           File Menu Action Methods                           #
