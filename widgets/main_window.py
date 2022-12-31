@@ -203,7 +203,6 @@ class MainWindow(QMainWindow):
         self.help_menu.addAction(self.help_action)
         self.help_menu.addAction(self.about_action)
         
-        
         if(self.settings.value("theme") == "dark"):
             self.file_menu.setProperty("darkMode", True)
             self.import_menu.setProperty("darkMode", True)
