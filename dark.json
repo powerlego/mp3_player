@@ -2,5 +2,9 @@
     "primary-color": "#282a36",
     "primary-color-dark": "#21222c",
     "primary-color-light": "#343746",
-    "text-color": "#f8f8f2"
+    "text-color": "#f8f8f2",
+    "menu-bar-selected-color": "#2d2f34",
+    "menu-background-color": "#343746",
+    "menu-selected-color": "#44475a",
+    "menu-separator-color": "#606060"
 }
