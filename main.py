@@ -12,10 +12,10 @@ def main():
     app.setOrganizationName("MP3 Player")
     app.setApplicationName("MP3 Player")
     QSettings.setDefaultFormat(QSettings.IniFormat)
-    file = QtCore.QFile(":/style.qss")
-    file.open(QtCore.QFile.ReadOnly | QtCore.QFile.Text)
-    stylesheet = str(file.readAll(), encoding="utf-8")
-    file.close()
+    with open("stylesheet.qss", "r") as f:
+        _style = f.read()
+        app.setStyleSheet(_style)
+        
     if QSettings().value("theme", "dark") == "dark":
         app.setProperty("darkMode", True)
     else:
@@ -23,7 +23,6 @@ def main():
 
     window = MainWindow()
     window.show()
-    app.setStyleSheet(stylesheet)
     sys.exit(app.exec())
 
 

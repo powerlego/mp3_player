@@ -204,16 +204,16 @@ class MainWindow(QMainWindow):
         self.help_menu.addAction(self.about_action)
         
         
-        # if(self.settings.value("theme") == "dark"):
-        #     self.file_menu.setProperty("darkMode", True)
-        #     self.import_menu.setProperty("darkMode", True)
-        #     self.edit_menu.setProperty("darkMode", True)
-        #     self.help_menu.setProperty("darkMode", True)
-        # else:
-        #     self.file_menu.setProperty("darkMode", False)
-        #     self.import_menu.setProperty("darkMode", False)
-        #     self.edit_menu.setProperty("darkMode", False)
-        #     self.help_menu.setProperty("darkMode", False)
+        if(self.settings.value("theme") == "dark"):
+            self.file_menu.setProperty("darkMode", True)
+            self.import_menu.setProperty("darkMode", True)
+            self.edit_menu.setProperty("darkMode", True)
+            self.help_menu.setProperty("darkMode", True)
+        else:
+            self.file_menu.setProperty("darkMode", False)
+            self.import_menu.setProperty("darkMode", False)
+            self.edit_menu.setProperty("darkMode", False)
+            self.help_menu.setProperty("darkMode", False)
 
     # ---------------------------------------------------------------------------- #
     #                           File Menu Action Methods                           #
