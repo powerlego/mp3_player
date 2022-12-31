@@ -17,6 +17,13 @@ class MainWindow(QMainWindow):
         layout.addWidget(label)
         self.widget.setLayout(layout)
         self.settings = QtCore.QSettings()
+        if(self.settings.value("theme", "dark") == "dark"):
+            self.setProperty("darkMode", True)
+            self.menuBar().setProperty("darkMode", True)
+        else:
+            self.setProperty("darkMode", False)
+            self.menuBar().setProperty("darkMode", False)
+            
         self.read_settings()
         self.create_actions()
         self.create_menus()
@@ -195,6 +202,18 @@ class MainWindow(QMainWindow):
         self.help_menu = self.menuBar().addMenu(self.tr("Help"))
         self.help_menu.addAction(self.help_action)
         self.help_menu.addAction(self.about_action)
+        
+        
+        # if(self.settings.value("theme") == "dark"):
+        #     self.file_menu.setProperty("darkMode", True)
+        #     self.import_menu.setProperty("darkMode", True)
+        #     self.edit_menu.setProperty("darkMode", True)
+        #     self.help_menu.setProperty("darkMode", True)
+        # else:
+        #     self.file_menu.setProperty("darkMode", False)
+        #     self.import_menu.setProperty("darkMode", False)
+        #     self.edit_menu.setProperty("darkMode", False)
+        #     self.help_menu.setProperty("darkMode", False)
 
     # ---------------------------------------------------------------------------- #
     #                           File Menu Action Methods                           #
