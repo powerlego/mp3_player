@@ -2,27 +2,68 @@
 /*                                Global Theme                                */
 /* -------------------------------------------------------------------------- */
 
-[darkMode="true"] *{
+/* [darkMode="true"] * {
   background-color: #333333;
   color: #ffffff;
-}
+} */
 
-[darkMode="false"] *{
-    background-color: #ffffff;
-    color: #000000;
+* {
+  background-color: @primary-color-dark;
+  color: @text-color;
 }
 
 /* --------------------------------------------------------------------------
 /*                                  Menu Bar                                  */
 /* -------------------------------------------------------------------------- */
 QMenuBar {
-    spacing: 3px;
+  background-color: #e0e0e0;
 }
 
-QMenuBar[darkMode="true"] {
-    background-color: #424242;
+/* QMenuBar[darkMode="true"] {
+  background-color: #424242;
+} */
+
+QMenuBar::item {
+  background: transparent;
+  padding: 1px 5px;
 }
 
-QMenuBar[darkMode="false"] {
-    background-color: #e0e0e0;
+QMenuBar::item:selected {
+  background: #b3b3b3;
 }
+
+/* QMenuBar::item:selected[darkMode="true"] {
+  background: #595959;
+} */
+
+QMenu {
+  background-color: #e0e0e0;
+  border: 1px solid #b3b3b3;
+}
+
+/* QMenu[darkMode="true"] {
+  background-color: #424242;
+  border: 1px solid #595959;
+} */
+
+QMenu::item {
+  padding: 1px 5px;
+  background-color: transparent;
+}
+
+QMenu::item:selected {
+  background-color: #b3b3b3;
+}
+
+/* QMenu::item:selected[darkMode="true"] {
+  background-color: #595959;
+} */
+
+QMenu::separator {
+  height: 1px;
+  background-color: #b3b3b3;
+}
+
+/* QMenu::separator[darkMode="true"] {
+  background-color: #595959;
+} */
