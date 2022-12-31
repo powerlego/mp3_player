@@ -11,14 +11,14 @@
 /*                                  Menu Bar                                  */
 /* -------------------------------------------------------------------------- */
 QMenuBar {
-  border-radius: 5px;
   background-color: @primary-color;
 }
 
 QMenuBar::item {
   background: transparent;
-  padding: 1px 5px;
+  padding: 1px 7px;
   border-radius: 5px;
+  margin: 1px 2px 1px 2px;
 }
 
 QMenuBar::item:selected {
@@ -26,10 +26,7 @@ QMenuBar::item:selected {
 }
 
 QMenu {
-  border-radius: 5px;
-  border-style: solid;
-  border-color: @menu-background-color;
-  border-width: 1px;
+  margin: 2px;
   background-color: @menu-background-color;
 }
 
@@ -37,8 +34,7 @@ QMenu::item {
   padding: 3px 5px;
   background-color: transparent;
   border-radius: 5px;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin: 1px 2px 1px 2px;
 }
 
 QMenu::item:selected {
