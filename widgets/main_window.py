@@ -2,6 +2,7 @@ from PySide6.QtWidgets import QMainWindow
 from PySide6 import QtWidgets
 from PySide6 import QtCore
 from PySide6 import QtGui
+from .settings_window import SettingsWindow
 
 
 class MainWindow(QMainWindow):
@@ -15,10 +16,27 @@ class MainWindow(QMainWindow):
         layout.setContentsMargins(5, 5, 5, 5)
         layout.addWidget(label)
         self.widget.setLayout(layout)
+        self.settings = QtCore.QSettings()
+        self.read_settings()
         self.create_actions()
         self.create_menus()
         self.setMinimumSize(160, 160)
         self.resize(480, 320)
+        
+    def read_settings(self):
+        self.theme = self.settings.value("theme", "dark")
+        self.language = self.settings.value("language", "en")
+        self.volume = self.settings.value("volume", 50)
+        
+    def write_settings(self):
+        self.settings.setValue("theme", self.theme)
+        self.settings.setValue("language", self.language)
+        self.settings.setValue("volume", self.volume)
+        
+    def closeEvent(self, event):
+        self.write_settings()
+        self.settings.sync()
+        event.accept()
 
     def create_actions(self):
         # ---------------------------------------------------------------------------- #
@@ -234,6 +252,8 @@ class MainWindow(QMainWindow):
 
     def preferences(self):
         # TODO: Implement preferences
+        settings_window = SettingsWindow()
+        settings_window.exec()
         print("Preferences")
 
     # ---------------------------------------------------------------------------- #

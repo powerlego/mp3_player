@@ -8,10 +8,14 @@ class SettingsWindow(QDialog):
         self.setWindowTitle("Settings")
         self.resize(400, 300)
         self.setModal(True)
-        self.settings = QSettings()
+        self.settings = QSettings(QSettings.UserScope, "MP3 Player", "settings")
         self.theme = self.settings.value("theme", "dark")
         self.language = self.settings.value("language", "en")
-        self.volume = self.settings.value("volume", 50)
+        
+    def closeEvent(self,event):
+        self.write_settings()
+        event.accept()
+        
         
     def write_settings(self):
         self.settings.setValue("theme", self.theme)
