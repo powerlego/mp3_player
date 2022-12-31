@@ -2,7 +2,7 @@
 <RCC version="1.0">
     <qresource>
         <file alias="style.qss">stylesheet.qss</file>
-        <file>darkVars.json</file>
-        <file>lightVars.json</file>
+        <file>dark.json</file>
+        <file>light.json</file>
     </qresource>
 </RCC>
