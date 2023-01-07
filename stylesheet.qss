@@ -2,46 +2,41 @@
 /*                                Global Theme                                */
 /* -------------------------------------------------------------------------- */
 
-* {
-  background-color: @primary-color-dark;
-  color: @text-color;
-}
-
 /* -------------------------------------------------------------------------- */
 /*                                  Menu Bar                                  */
 /* -------------------------------------------------------------------------- */
 QMenuBar {
-  background-color: @primary-color;
+  background-color: palette(button);
 }
 
 QMenuBar::item {
   background: transparent;
-  padding: 1px 7px;
+  padding: 1px 4px;
   border-radius: 5px;
-  margin: 1px 2px 1px 2px;
 }
 
 QMenuBar::item:selected {
-  background: @menu-bar-selected-color;
+  background: palette(highlight);
 }
 
 QMenu {
   margin: 2px;
-  background-color: @menu-background-color;
+  /* background-color: palette(midlight); */
 }
 
 QMenu::item {
   padding: 3px 5px;
   background-color: transparent;
   border-radius: 5px;
-  margin: 1px 2px 1px 2px;
+  margin: 1px 2px;
 }
 
 QMenu::item:selected {
-  background-color: @menu-selected-color;
+  background-color: palette(highlight);
 }
 
-QMenu::separator {
-  height: 1px;
-  background-color: @menu-separator-color;
-}
+/* QTreeWidget#settingsView {
+  background-color: palette(mid);
+  background-color: @primary-color; 
+   border: 3px inset @primary-color;
+} */
