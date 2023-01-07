@@ -35,6 +35,13 @@ QMenu::item:selected {
   background-color: palette(highlight);
 }
 
+QMenu::separator {
+  height: 2px;
+  background: palette(midlight);
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
 /* QTreeWidget#settingsView {
   background-color: palette(mid);
   background-color: @primary-color; 
