@@ -19,7 +19,9 @@ class SettingsWindow(QDialog):
         self.splitter = QtWidgets.QSplitter()
         self.splitter.setOrientation(QtCore.Qt.Orientation.Horizontal)
         self.settingsList = QtWidgets.QListWidget()
-        self.settingsList.setSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.settingsList.setSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding
+        )
         self.settingsList.setSpacing(2)
         self.settingsList.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.settingsList.setObjectName("settingsList")
@@ -29,12 +31,14 @@ class SettingsWindow(QDialog):
         self.add_settings(self.mainSettings())
         self.settingsList.setCurrentRow(0)
         self.settingsList.currentItemChanged.connect(self.on_current_item_changed)
-        self.vbox = QtWidgets.QVBoxLayout()
-        self.vbox.addWidget(GeneralSettings())
-        self.vboxWidget = QtWidgets.QWidget()
-        self.vboxWidget.setLayout(self.vbox)
+        self.settingsArea = QtWidgets.QStackedLayout()
+        self.settingsArea.addWidget(GeneralSettings())
+        self.settingsArea.addWidget(AppearanceSettings())
+        self.settingsArea.addWidget(AudioSettings())
+        self.settingsAreaWidget = QtWidgets.QWidget()
+        self.settingsAreaWidget.setLayout(self.settingsArea)
         self.splitter.addWidget(self.settingsList)
-        self.splitter.addWidget(self.vboxWidget)
+        self.splitter.addWidget(self.settingsAreaWidget)
         self.splitter.setStretchFactor(0, 0)
         self.splitter.setStretchFactor(1, 5)
         self.layout = QtWidgets.QVBoxLayout()
@@ -44,19 +48,11 @@ class SettingsWindow(QDialog):
     def on_current_item_changed(
         self, current: QtWidgets.QListWidgetItem, previous: QtWidgets.QListWidgetItem
     ):
-        if(current.text() == "General"):
-            self.vbox.takeAt(0).widget().close()
-            self.vbox.insertWidget(0,GeneralSettings())
-        elif (current.text() == "Appearance"):
-            self.vbox.takeAt(0).widget().close()
-            self.vbox.insertWidget(0,AppearanceSettings())
-        elif (current.text() == "Audio"):
-            self.vbox.takeAt(0).widget().close()
-            self.vbox.insertWidget(0,AudioSettings())
-        else:
-            self.vbox.takeAt(0).widget().close()
-            self.vbox.insertWidget(0,QtWidgets.QLabel("Not implemented yet"))
-        
+        if self.settingsList.currentRow() > self.settingsArea.count():
+            QtWidgets.QMessageBox.critical(self, "Error", "Settings not found")
+            return
+        self.settingsArea.setCurrentIndex(self.settingsList.currentRow())
+
     def mainSettings(self):
         generalItem = QtWidgets.QListWidgetItem("General")
         font = generalItem.font()
@@ -93,7 +89,19 @@ class SettingsWindow(QDialog):
         self.volume = self.settings.value("volume", 50)
 
 
-class GeneralSettings(QtWidgets.QWidget):
+class GeneralSettings(QtWidgets.QTabWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.build_ui()
+
+    def build_ui(self):
+        self.generalTab = GeneralTab()
+        self.uiTab = UITab()
+        self.addTab(self.generalTab, "General")
+        self.addTab(self.uiTab, "UI")
+
+
+class GeneralTab(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.build_ui()
@@ -104,7 +112,17 @@ class GeneralSettings(QtWidgets.QWidget):
         self.layout.addWidget(self.label)
         self.setLayout(self.layout)
         
-        
+class UITab(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.build_ui()
+
+    def build_ui(self):
+        self.label = QtWidgets.QLabel("UI")
+        self.layout = QtWidgets.QVBoxLayout()
+        self.layout.addWidget(self.label)
+        self.setLayout(self.layout)
+
 class AppearanceSettings(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -115,7 +133,8 @@ class AppearanceSettings(QtWidgets.QWidget):
         self.layout = QtWidgets.QVBoxLayout()
         self.layout.addWidget(self.label)
         self.setLayout(self.layout)
-        
+
+
 class AudioSettings(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -126,4 +145,3 @@ class AudioSettings(QtWidgets.QWidget):
         self.layout = QtWidgets.QVBoxLayout()
         self.layout.addWidget(self.label)
         self.setLayout(self.layout)
-        
