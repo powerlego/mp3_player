@@ -92,6 +92,7 @@ class SettingsWindow(QDialog):
 class GeneralSettings(QtWidgets.QTabWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.setObjectName("generalSettings")
         self.build_ui()
 
     def build_ui(self):
