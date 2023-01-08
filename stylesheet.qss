@@ -42,8 +42,15 @@ QMenu::separator {
   margin-right: 2px;
 }
 
-/* QTreeWidget#settingsView {
-  background-color: palette(mid);
-  background-color: @primary-color; 
-   border: 3px inset @primary-color;
-} */
+QListWidget#settingsList {
+  show-decoration-selected: 1;
+}
+
+QListWidget#settingsList::item{
+  margin: 1px 2px;
+}
+
+QListWidget#settingsList::item:selected {
+  background-color: palette(highlight);
+  border-radius: 5px;
+}
