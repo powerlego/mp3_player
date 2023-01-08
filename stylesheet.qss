@@ -2,11 +2,14 @@
 /*                                Global Theme                                */
 /* -------------------------------------------------------------------------- */
 
+
 /* -------------------------------------------------------------------------- */
 /*                                  Menu Bar                                  */
 /* -------------------------------------------------------------------------- */
 QMenuBar {
   background-color: palette(button);
+  spacing: 1px;
+  min-width: 10ex;
 }
 
 QMenuBar::item {
@@ -46,11 +49,48 @@ QListWidget#settingsList {
   show-decoration-selected: 1;
 }
 
-QListWidget#settingsList::item{
+QListWidget#settingsList::item {
   margin: 1px 2px;
 }
 
 QListWidget#settingsList::item:selected {
   background-color: palette(highlight);
   border-radius: 5px;
+}
+
+QListWidget#settingsList::item:hover {
+  background-color: palette(midlight);
+  border-radius: 5px;
+}
+
+QTabWidget::pane {
+  background: palette(midlight);
+  border-top: 2px solid palette(button);
+  border-radius: 2px;
+}
+
+QTabWidget::tab-bar {
+  left: 5px; /* move to the right by 5px */
+}
+
+QTabBar::tab {
+  /* background: qlineargradient(
+    x1: 0,
+    y1: 0,
+    x2: 0,
+    y2: 1,
+    stop: 0 hsl(from palette(midlight) h calc(s - 5%) l),
+    stop: 0.4 palette(midlight),
+    stop: 0.5 hsl(from palette(midlight) h calc(s - 2%) l),
+    stop: 1 hsl(from palette(midlight) h calc(s - 4%) l)
+  ); */
+  background: hsl(from "#5e5c5b" h calc(s + 50%) l);
+  border: 2px solid palette(midlight);
+  border-bottom-color: palette(button); /* same as pane color */
+
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 5px;
+  min-width: 10ex;
+  margin-right: 2px;
 }
