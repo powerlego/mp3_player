@@ -172,3 +172,10 @@ cython_debug/
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+*.db
+palletes.txt
+**/tasks.json
+run.bat
+*.lock
+dark_theme_2.png
